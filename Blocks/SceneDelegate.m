@@ -19,6 +19,66 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    /*
+    __block NSInteger counter = 0;
+    
+    void(^testBlock)(void);
+    
+    testBlock = ^{
+        counter++;
+        NSLog(@"test block");
+    };
+    
+    testBlock();
+    testBlock();
+    testBlock();
+    testBlock();
+    
+//    [self testMethodWithParam:@"input str" andValue:12];
+    void(^testBlockWithParams)(NSString *, NSInteger) = ^(NSString *str, NSInteger intValue){
+        NSLog(@"string = %@ and int = %ld", str, intValue);
+    };
+    
+    
+    testBlockWithParams(@"test", 12);
+    
+    NSString *(^testBlockReturnAndParmas)(NSString *, NSInteger) = ^(NSString *stringParam, NSInteger intValue){
+        NSString *str = [NSString stringWithFormat:@"%@ and %ld", stringParam, intValue];
+        return str;
+    };
+    
+    NSString *result = testBlockReturnAndParmas(@"ok im there", 12);
+    NSLog(@"%@",result);
+    
+    
+    void(^hijackValue)(void) = ^{
+        NSLog(@"%@ - value hijacked %ld time(s)", result, counter);
+    };
+    
+    hijackValue();
+ */
+    [self testBlock:^{
+        NSLog(@"start method in self");
+    }];
+    
+    NSLog(@"finished method in self");
+    
+}
+
+- (void)testMethod {
+    NSLog(@"testMethod");
+}
+
+- (void)testMethodWithParam:(NSString *) string andValue: (NSInteger) intValue {
+    NSLog(@"testMethodWithParam %@, and %ld", string, intValue);
+}
+
+- (void)testBlock: (void (^)(void)) helper {
+    NSLog(@"start helper");
+    helper();
+    helper();
+    helper();
+    NSLog(@"finished helper");
 }
 
 
